@@ -8,7 +8,7 @@ D: 7
 
 T: 47
 
-GitHub: https://github.com/ABDELSAMADAMINEOUMAR
+GitHub: https://github.com/ABDELSAMADAMINEOUMAR/27047-abdelsamad-amine-dart-basics
 ## Files
 - `dart_basics.dart`: B2, B3, C5 and D2
 - `momo_sim.dart`: Part F mini project (MoMo USSD simulator)
