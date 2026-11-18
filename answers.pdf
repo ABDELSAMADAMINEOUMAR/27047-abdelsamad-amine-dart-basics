@@ -1,378 +1,156 @@
-Reg no: 27047 | D = 7 | T = 47
-Name: ABDELSAMAD AMINE OUMAR
-Part A
-A1
-3.4 : a / b gives a double
-3 : ~/ drops the decimal part
-2 : 17 = 3*5 + 2
-3 : % in Dart is never negative, so -17 % 5 is 3-3 - -17 / 5 = -3.4 and ~/ cuts toward zero-17 - abs() runs first, then the minus is applied
-false: 0.1 + 0.2 is 0.30000000000000004 in binary
-true: 10 and 10.0 have the same value
-A2 (x = 7, y = 47)
-z = 7*2 + 47~/4 = 14 + 11 = 25, then z += 7 makes 32.
-32 - 25 + 7
-true - 32 is even
-327 - '32' + '7' joins two strings
-The type of z is int. Dart looks at the first value I gave it, an int times 2 plus  int division which is int,
-so var becomes int.
-Part B
-B1
-6:Kigali has 6 letters
-i : last index is 5
-ga : index 2 and 3, 4 is not included
-3: KIGALI, A is at index 3
-false: case sensitive, k is not K
-Kigali.length - only $city is replaced, .length is plain text
-6 - ${} runs the expression
-KigaliKigali - * repeats the string
-Kigali - toUpperCase gives a new string, city did not change
-K!gal! - both i are replaced
-55 - '5' + '5' joins text
-10 - 5 + 5
-B2
-Output: ABDELSAMAD AMINE OUMAR has 10 vowels (4 + 3 + 3). The line that makes capitals count is
-String lowerText = text.toLowerCase(); If I remove it, capital A, E, I, O, U do not match 'aeiou', and since
-my name is all capitals the answer would be 0.
-B3
-A.A.O.
-A.U.
-(empty line for the spaces-only string)
-My first version split on a single space and took the first letter of each piece. On ' ana uwase ' this made
-empty pieces, and reading [0] of an empty string gave a RangeError. I fixed it by using trim() first, splitting
-with RegExp(r'\s+') and returning an empty string when nothing is left.
-Part C
-C1
-Output: 0, 1, 3. At i = 2 continue skips the print. At i = 4 break stops the loop before the print.
-C2
-With day = 2 it prints Early week. With day = 1 it also prints Early week, because case 1 is empty and uses
-the body of case 2. A C or Java programmer would expect it to continue into the next cases and print
-Early week, Midweek and Weekend soon. Dart 3 does not fall through, it leaves the switch after a case
-that has a body.
-C3
-50 - bonus is null so ?? gives 50
-70 - first ??= sets it to 70
-10 - do-while runs once before it checks n < 10
-The second ??= does nothing because bonus is no longer null.
-C4 (x = 7)
-OEO
-3
-O
-7 is odd (O), 4 is even (E), 1 is odd (O), then x becomes -2 and the loop stops. Length is 3 and the first
-letter is O.
-C5
-Height is 7 + 3 = 10. The number of spaces on each row is height minus the row number, so the symbols
-stay on the right side. For 0 and -2 the while condition is false right away, so nothing prints.
-Part D
-D1
-1 - bump changes its own local count, not the global one
-5 - doubleIt changes a copy of v
-1180 - 1000 * 18 ~/ 100 = 180
-1178 - 999 * 18 = 17982, ~/ 100 gives 179
-1000 - rate 0 adds nothing
-addVat(999) is not exactly 18% more because ~/ is integer division. The real value is 1178.82 and the .82
-is thrown away.
-D2 output
-Reg no: 27047 | D = 7 | T = 47
-Receipt 1 | 8700 RWF | fee 100 RWF | to 078*****56
-Receipt 2 | 12700 RWF | fee 250 RWF | to 078*****56
-Receipt 3 | 16700 RWF | fee 250 RWF | to 078*****56
-Receipt 4 | 20700 RWF | fee 250 RWF | to 078*****56
-Receipt 5 | 24700 RWF | fee 250 RWF | to 078*****56
-Receipt 6 | 28700 RWF | fee 250 RWF | to 078*****56
-Receipt 7 | 32700 RWF | fee 250 RWF | to 078*****56
-Receipt 8 | 36700 RWF | fee 250 RWF | to 078*****56
-Receipt 9 | 40700 RWF | fee 250 RWF | to 078*****56
-Receipt 10 | 44700 RWF | fee 250 RWF | to 078*****56
-Total fees: 2350 RWF
-Receipt 2 was the first one in the 250 RWF band, because 12700 is more than 10000.
-Part E
-1. grade(85) returns 'C'. The first check mark >= 50 is already true, so it returns before the other checks.
-2. isPalindrome('level') gives a RangeError. At i = 0 it reads word[5], but the last index is 4.
-3. Lines I changed in grade: if (mark >= 50) became if (mark >= 80); return 'C' became return 'A'; } else if
-(mark >= 80) became } else if (mark >= 50); return 'A' became return 'C'. Line changed in isPalindrome:
-word[word.length - i] became word[word.length - 1 - i]. Tests: grade 85 = A, 75 = B, 55 = C, 30 = F.
-isPalindrome level = true, abba = true, abc = false.
-4. After the fix, isPalindrome('Level') should return true. A palindrome is about the letters, and when I
-read Level backwards I get the same word, whether the L is capital or not. So I added one extra line, word
-= word.toLowerCase();, before the loop.
-Part F
-Reg no: 27047 | D = 7 | T = 47
-false
-false
-false
-false
-true
-Starting balance: 43,500 RWF
-Sent 24,000 RWF (fee 250 RWF). New balance: 19,250 RWF
-Failed: insufficient balance
-Failed: insufficient balance
-Airtime 1,000 RWF purchased. New balance: 18,250 RWF
-Failed: invalid amount
-Failed: insufficient balance
-Final balance: 18,250 RWF
-The second send surprised me. After the first send only 19,250 RWF is left, which is less than 24,000 plus
-the 250 fee.
-My own tests (expected, then real output):
-formatRwf(42) - expected 42 RWF
-formatRwf(1000000) - expected 1,000,000 RWF
-formatRwf(-1) - expected -1 RWF - (could break with the minus)
-isValidPin('00001') - expected true - (starts with zeros)
-isValidPin('12a45') - expected false
-isValidPin('11111') - expected false
-Name: Abdelsamad Amine Oumar
-Reg no: 27047
-D = 7
-T = 47
-Initials: AAO
-GitHub: https://github.com/ABDELSAMADAMINEOUMAR
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document (opensource)
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/Contents 13 0 R /MediaBox [ 0 0 612 792 ] /Parent 12 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
 
-=========================================================
-PART A: Variables and operators
-=========================================================
+>> 
+  /Type /Page
+>>
+endobj
+6 0 obj
+<<
+/Contents 14 0 R /MediaBox [ 0 0 612 792 ] /Parent 12 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
 
-A1
-Predicted and actual output were the same.
+>> 
+  /Type /Page
+>>
+endobj
+7 0 obj
+<<
+/Contents 15 0 R /MediaBox [ 0 0 612 792 ] /Parent 12 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
 
-3.4    "/" always gives a double, even with two ints.
-3      "~/" is integer division, so 17 ~/ 5 = 3.
-2      17 % 5 leaves remainder 2.
-3      In Dart % is never negative. -17 % 5 = 3.
--3     ~/ cuts toward zero. -3.4 becomes -3.
--17    The method .abs() runs first, then the minus. So it is -(17.abs()).
-false  0.1 + 0.2 is 0.30000000000000004 because doubles are not exact.
-true   == compares the value, so 10 and 10.0 are equal.
+>> 
+  /Type /Page
+>>
+endobj
+8 0 obj
+<<
+/Contents 16 0 R /MediaBox [ 0 0 612 792 ] /Parent 12 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
 
-A2 (x = 7, y = 47)
-z = 7*2 + 47~/4 = 14 + 11 = 25, then z += 7 gives 32.
-Predicted and actual output were the same.
+>> 
+  /Type /Page
+>>
+endobj
+9 0 obj
+<<
+/Contents 17 0 R /MediaBox [ 0 0 612 792 ] /Parent 12 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
 
-32     the value of z.
-true   32 is even.
-327    '$z' is "32" and '$x' is "7", and + joins them as text.
+>> 
+  /Type /Page
+>>
+endobj
+10 0 obj
+<<
+/PageMode /UseNone /Pages 12 0 R /Type /Catalog
+>>
+endobj
+11 0 obj
+<<
+/Author (Abdelsamad Amine Oumar) /CreationDate (D:20261118183757+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20261118183757+00'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+  /Subject (\(unspecified\)) /Title (Dart Basics Answers - 27047) /Trapped /False
+>>
+endobj
+12 0 obj
+<<
+/Count 5 /Kids [ 5 0 R 6 0 R 7 0 R 8 0 R 9 0 R ] /Type /Pages
+>>
+endobj
+13 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1572
+>>
+stream
+GatU2>BALX'RnB33;'(WOuN[#>dE_W_/.OPe"l4TFJ!di[URb='")6UFIM+$8$XirRI\]>1WGa+ofJe+j?X$#Sp<dC^h<f:%j#sZ9HM%9\m:]Y_"HdPqiOrOpA-K4\gWMY*Aa$08#YS#Q;Aqr.mA1og5>?7)m(WR.i8l?+pjs-/E%K.C'YuL/"4WpR!aP.WV5uqrq?9_#JEM(r3"d)>m>8A?SQTIq#!f@MB6@a9dRnP$t7.8KtANRq:9!?SgM7l&H"hl3rhFHi"F2A$,0E'A'Pc5WC2*l?*4$eWP=AE&EZS:jKRH8R$ngI2\K7T**lk-4G:3&<HpV)I!tb^2S;8AAcE:3jm1UX@."ggf%gP]?c)[HKL>O$jG_;\.Y7(+`.I,>M8NF#KDo;\IgL;^eYml;C!7biA)inDWZWaH67iNJ=DS=Z:&uk3h5uQ3$]o6cXL89X?'2OJKIq?9&;pV=E.BPiLD=8,C*eCM-#3mj^m#/,(K>$F0@GO9&@3[H9Q164!,hijD<PD.K:S`D.cT0/>Y6Hm5'*/)`a^j`^Mu!j@+bB`qr&AjNmEA,%+^.(b0HT:o266M7tm,!`/<V1ChPFt6)Ql@8/ZMrhGj%So-T8n7b(b^i0'Lu[\bF6(L4g%bGB59QJ;Itgb,B1%g\-BOe#9PhI*B>4kU^%6lK!SNpFM!5(,$<EJ)R90L:g&,tmm8%Tk_D'[UJDl->gA$a^,)Q[h(I:e7$oQ6\%qM0d53_!AKN@tT5#54"V"oO6I"f)*aD[FoZNPM3iBc_(%NCj5Bsmc#%grClhN')Z'i^]r*VXt:M)1lD"=A1VFlB*.')2K+`g%!\5,%@6ddDYEV?er*Se>K4(!r*2u*/B:GS_)K3?5q<%hs7BI]#;K@79#j<DkFDuJ^Jp":/;c2;jt)oNO=[7I8-@E]Z,3e^9fP#VEa*57[3bd2[+qdPMJ_tjiEL#P#hOckk(G)fR#WXBMWX?C<mpYjZZV7^n=XgAPJbFmGHb$=qnMDqU]9/LqQMo[:FmY<ZXAenlsgE#LeXX%Z$l/,844DdbHlp`V*)SKFq0tdaQD$C7<?.M1OEaY+aYPH0p;g8C!1]#b7'7j;-@&p9fBhW`jL_Kr%Yi%>A!1dBSsK_.!X2g[NcDi&^=AkNsMmZasGMBYI%44A2(5Pfqq^#:Q6&\OPD<me&Du6p]3TFn8o,[&Q<I^4K"+%6o9)&Wh_4'Y0VaPS)e]8Ndk^]Q-rHe15uW8e?U<ae#rj'T;[.;*E/\C,Fd<%[3m970(;"%$ZRj@3A^.<4:"uQWWV"'G$?>3fR&DIhUV>"SAR1c6qpb)f9um,%.&0I,^[5<XR2U=gKd%EIY)3B)+0%/fS#`hLDi;uE@fugV+,ppf;a%,57HlHh9?/JeHX7R`Y9K-/B%t">IEt-.?9DDWH@WWF=K_,h0&V#n*+TOX.#J%0hZ=-Z=""WM**?]`Neb@fEH8e:660'`c+;%)a1U2bb'#'j$ssPF'U=GSraH7KJHEWmZuJRQ6"[]9!"Cg^'hDci4/O+rm6@u,&h:\fIAa[Lq1F?8ebuuV^?4GfL*#\@;ti\Z8WdQ~>endstream
+endobj
+14 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1154
+>>
+stream
+Gas1^?$#!`'Re<2\.]qCYf)IqfOUDI4'=m3h.]NnFXJhk;/Cg6fTIc,!WN$=fjKH%"GT;dk?ctkcB0-o&Ds/W)s9Ur6i-RN5f&8n'a58#6K.C?#g`K3$hh[+-i,[6"rM-nC/(nX&/I*j4qIT@KfKd*l,F0p.<'RFYN&7_s.uqqhQjLWBkP]gcG/t;rmCA1FqT'_0C4]S+ZZZhV@0tk/e?\Oj=qBh8jX^L4_aT5.GrNFBOg:\CEo(6+c8i\jb=Y50p6FVAn25aEt_ifa$$<DdVfht9WiXr_iQ/N:WR:57p^9t3,B`r'/oE]Elb8ur&\7=[RK9AM^U>&Y_SSm4-PJI('W5O'hhilURJqXVhN^cDM14;!UKBYhmNh'rkeD/LuJ+l+`;$07M+")0H*q84PY>qBg/<&P#eWB<gh[SGKBER53!p]FM&F#<q])L6Rh*@K/_=%2PV&:HK.<_7)TiD40ht)9:!t[CJHeLA6@-*&p/KdQnfDE"gCcaMU@TK,sUs_Xc\es1fLCs@oZrN,A[^bE:uC:UTj3IRM*L]P/B%SBH^6)Iq#b[W6(R6*OuM,S=.cVl"l,)q/ZcR]Ea;+f\%uuNDtY2WY(QJMAu<jVQ'V@^LR%#RM3@)NP.%,=)6(O**$oVR3fe\"cmMC<VC"4eA"o"+!N_55@VL#9pLmdiY.AUM+Z^Nq8_c&0FG6b\5Yslnh#nqM[N$*Q=U7KXibeOcqQ-LX&nrtkMJ@rO,9-&jiiT!6+ag"\;!a9=,L1D;e9%:@<"Z(A19;G52k&V8g=,EmI>R"IRhDeT0q)YRb(%^D21nZQDWrYbVFD'H+ie1$VcE>Zkb;+DE>^qL5Lgd;(;t&^47\[r0V3XDWr'j%Uh&c"4?d"SlXB5YJtu[gu4&gaE8jG7C!?=,Wk(('85:#;-05dA=R`j%9SNS?d08g_Z<>q8`e#5N!K,T($tlurr^4$L;([4%]qea:=/r&Cj4^(f%[brW?e1<3m5kHABP"a]nmD)FuL61B(/RReYop7s/)[:`U]:l9Y:"rWa@@T.t:rJd*Sc&.5P14h:D>-e+'fYoU9V`/b"A5GQd'bc(M(_^e)\f3jkp^Sj's]kR6-^STOZ!s0pMDFdMt'/umOhUAFg@Wn6R2qY`%Hf/lFg?OCoK"$)B,*<~>endstream
+endobj
+15 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1470
+>>
+stream
+Gat=*D/\E'&H7-n@]HG[jG;hRDh`$WjcU`T8u4@5G99F@/G=\O(b]/J+]2TqH_4GN^q!_(_^L0YcSIBSbj<O\o'm=[4'E2D*7O.CO9fM^,LQ$B1qoZan[h$BM2c,V8%j'fb)ennC^gf#Y=mmZ$,N"X;4Blfbaa8\Akl&]Y+?jVs%_TaC4<pG.ZkCb7]scYQ2*O@PGUQ),+6JNQ_"<k027m>b-aslHqmTTa]5%U->MiidWqA:<9IfaR[gn`A,5SP&s^`U95-[JR/n]fA#Z]\fG54UXYR#FPcI;caK4rACRIPi4@_jVM(60l/q.*K8/4LDD^D0s"`V-]H.(LC5%-0h;E/7NPk>/*Ep'IP4V8Vba+asr(=oHPRJa12AF(+[l<3`5A_*l/eC,4SmS67QZHc#L!mY9HpAAf%QU;[nnq]:WhX]%erO4ll@9?RO?>YqGd_$:KS_b8"ViauagS9_o8nPG27[8gm$WZ@lOF*k*`H'B0ND)`T$e">\M2M@ooZH\U:e!%LUEkgb+e+s6H<P$!br3218Rr,q_f;K=.H81TXG>J`N#'BY29jXYV'nW,_PkbdBBL>'kFG$b66?ts%u/rQ;"3M46qI?JZ4q;N<H"SB&+#&O%L.P`*ErD-(pl32Ep[Ur<Sm>)AO,Y9@(Sfr>/c3`ZZ]?W=N`[)ELkS)aYSi>8NUY'/u!t>+JbTj&F<5H5L;_92<6`5Jc^Ur[=!/i`%"@q3).!j`fN50I6&IV/VNAB!KpJ)[n+Ps*gBiG#isUFJ1cJVXZM5il'5PWlu5`;WH;iOAq*\1a*-o8O774fP[g[t+a\Z&FR?!\qZ7[$6NhOJd/AIH2Ih)h@6;gAr55aE`c_j0p)"_iL@%@'I3;T7@h7X8!0,9T>R@%=hal=#>>uOudDUZ\WE^st;/3TADg]@A69hJUVdTC#oW]S,apb3*;9)1Fb1a^Nq:l&.m+t%3G@:0Z6MF7HZCT:hV`.+6nB+uPiSZp*]C9KOA;m3%G0qn#Z7D+Te@91:`.rj)BSmE;4^e9tBc]0bpnqj<GQ"hjaNQ%MUQLqoDM4d3c*X1KlT/<d[go8BEePg:/%7=s]^NJ7U>\._01L!?_98t)^kgAG"Ph'PfWtdpcdPCUXE;Lbr5ojn4?CO=!"II3S]\IpO(k^jr#:-2REF\N_'o'HU$^psqpr3j\L@uKlA<"&WCPJ3kU+R5q0Fhcio.Tba6O9iNIk<W_/f%3H`M$4$#U!*)9.u"P3n\M%("VgL_#pK5<"O!j1Oo5riSU'?];^Vn(7(O^D5Y.j"F`upTqhOLTjU=UXus;GYdckX)Bh4$l?3GmRm!)fk[Q"q"ms7E`>!AcR(Po6i9d(?,q"hdsU7F_7D+5gphr&mEfkiH$S,EH;N0BK=`1:lFsl.,Eg67gCA$7R%mf\ma9A,jeuETMu4CGlYa;IJF$L0@`DJODG;#;1Vu>V@tSN!8mFjK009]Xq\LDl;NC~>endstream
+endobj
+16 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1634
+>>
+stream
+Gau0BD/\/e&H88.E@V77=`%/:m+?BA!F9#d!c=8MmeWX"#?miI/s</r<1TcLJ);7m99J83BRr1"/WoeIHg[K#%j(`Gp,a`(IUBpt$Qo9H<XJP"G7(BPE5"C.E8\3gZX]C";\[5/c`X8>!7h"mdK3GQ=p\#tX98RW(gXkc>/A/j?H^q5hHjQ]JJL\F1F(EnXT!e$0BD:Lr#>DlRP,Rd!uFIYn'9"6n!!9S(It^&K`nh-_<?c_*+Wodg+9]SE&!&E/g6U/dlI=6B5dqE]>EIi]G!q?Y5&U@)--Daf7k_!aqWDXB4]#J0Kg?#4:eUO?1^Ir1_<@$?F(.#.,c.tR=,GR?$O7G]`J/bEP'a=\6pNDnIe6hlQd()+G6f5pBeME(iI1+mt.NR'kL)1GW1T#,@Pt1\VPeOZ7aCG7O^r_lk(mOC8G%3=_*1:_.:c?Y#V;$7L965R>cd\OXr3kr&:$?0eS]qL;X;TG5fciPh@XEUc+ZL+GUnE12@)V(gA490jHS/6>6P-jS5?sl7B?QCm]sI-cR/0r;%)J%E?Q47l]LP'orbmgXIRI"Pjjt-:H<=H&6(U_o'3''<)=NXu8j2RKh^o[%E0i)#`%`^bclNE_jgOm)Nl/-s<d`JFCt[H@NQ<6QMm#-KHgK)3,\Wk<#KNUGM+qJVkPRl"m!7Yf2>Xo_Gr@^#MfaD'C%b9_uUrQj<r6q'@4/lSLCo#l7jXc>L[nC&#h`bp-8)DW,[a%[(*i37iG7>P(`i$"1G#Ld`fiP52+H/0h/&5c_J50:/e`35X.sZ5eL_+L%LqBU3Tr4FEAqVa!f5Ik9Q;YNn"kDTcVfR$Zj.4mX1/++KKfc]sY#r$>UQ1?Hb"G)+G2Ljg3l=nM3Th]X!?-^fO53'p2cLReQ$l%(l*A-.WVLl5q@B3S2QXu.q+$,22]j)t'&M3>dj1q8YtIP5TsV\?:qo]>5J9T_(W+Dq_u`D*JWV?3B62GU4iQLHNeGR,9IhO'tQ>!cQLA')?69dYsn7(YUoJY\p&UF/)%aR^ch=Q>OB`c?gHe51()/l\@Pn7RnXet49ga>Q82R9bW\-(JS3MKo/(^rUpC^>0c,>a+X7!Eu<R!qXc8._dcsJZ`+np&Bdf6FVlCik!DE4?W`.kKakQAW788pMO4\hc:InV`<\7NP;pJ"2M(?>SoQA*?54kC?0X+BVYk!>`J&0DiOscP&VLN13l`bIPb`5:^ZB;\4&QY)(:/"fu,#s:`-W@JjpS$`H9,m=2<5u&s==JnKCBh4'ldLn#C?&S1rGgE=[9\n;:^T6GittYqrrQ=AQS,VXoe@b%m`H.-&]l;si=E\O+&nk+"cV/'/jnO-YkWL-oa`QusuG-_\uD.#C`%S+U[B2EU:HD3"jZgGsE?dU4b;PUYdLZ`bqgVJ]hXjsMi-RfC$;8$qk-^0"^>Q=B^I32arOT_l[@oX++klniUh;3,50g*,8VY@=Y>\/'=#J]6ta&CcLmo_O\Yqu5IBW&^ffD;m!YEt?O4_V;p,MHa]rjtNe<faop/:3a[LK#m$XT9d*o/A-.$o[d)PUE-<o1=Nu1R5Y9JSY`4p20uPe0e%#[,/UFCpWgl,((np4f&$>:9>@UbTh[O']6Oi'_N$!9Q)q$W3<KNd!E`I9<r~>endstream
+endobj
+17 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 354
+>>
+stream
+Gaq3ab>,r/&4Q?hMRtF<9&mVg>9o)f=FaqeGFV7a`Xf9o9)bDR.7GIcp@uq(it84L`-KrEG`Z#J"N24aL"M\qa;6t]ij014j_g.XrL1]qA$rfbCj+nMdQr]"Ap)baDGIQO6&!s"d?r5?"QPXA8<e'K\IW2)ne8+(UPdM5.Gu)WC6/P`N$"]mUis+gJuVt&"*oR4`?P&pAds1+WSEhbU7@530^!Rt:>s)?9oaTj1gQa$L'U#TRUY92"'r%IZDspMERuled2,5_Oe\UL_PDBe:%QNg-^C>U1\-_N-IejAR-5@^T.KK^2jThirtaii3h,%Fb;X#s?,f,GYRhb2j^1/Hr/Cft%l.=:oD~>endstream
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000061 00000 n 
+0000000112 00000 n 
+0000000219 00000 n 
+0000000331 00000 n 
+0000000436 00000 n 
+0000000631 00000 n 
+0000000826 00000 n 
+0000001021 00000 n 
+0000001216 00000 n 
+0000001411 00000 n 
+0000001481 00000 n 
+0000001785 00000 n 
+0000001869 00000 n 
+0000003533 00000 n 
+0000004779 00000 n 
+0000006341 00000 n 
+0000008067 00000 n 
+trailer
+<<
+/ID 
+[<a99e59aafe5560758b4e48c3a333b6ca><a99e59aafe5560758b4e48c3a333b6ca>]
+% ReportLab generated PDF document -- digest (opensource)
 
-Type of z: int.
-Dart looks at the right side (x*2 + y~/4). int * int is int and
-int ~/ int is int, so z is an int and cannot change type later.
-
-=========================================================
-PART B: Strings
-=========================================================
-
-B1
-Predicted and actual output were the same.
-
-6              "Kigali" has 6 letters.
-i              last index is length - 1 = 5, which is 'i'.
-ga             substring(2, 4) takes index 2 and 3.
-3              "KIGALI", the A is at index 3.
-false          contains is case sensitive, the string has 'K' not 'k'.
-Kigali.length  without { } only $city is replaced, ".length" stays as text.
-6              ${city.length} calculates the length.
-KigaliKigali   * repeats the string.
-Kigali         toUpperCase() makes a new string, city is not changed.
-K!gal!         replaceAll changes every 'i' to '!'.
-55             '5' + '5' joins two strings.
-10             5 + 5 adds two ints.
-
-B2
-Output:
-ABDELSAMAD AMINE OUMAR has 10 vowels
-(ABDELSAMAD = 4, AMINE = 3, OUMAR = 3)
-
-The line that makes capitals count: String lowerText = text.toLowerCase();
-If I remove it, 'aeiou'.contains('A') is false. My name is all capitals,
-so the answer would be 0 vowels.
-
-B3
-Output:
-A.A.O.
-A.U.
-(empty line for ' ')
-
-Which input broke my first version: ' ana uwase ' (extra spaces).
-What I changed: I added trim(), changed split(' ') to split(RegExp(r'\s+')),
-and skip empty parts. (See Error 2 in Part G.)
-
-=========================================================
-PART C: Control flow
-=========================================================
-
-C1
-Output:
-0
-1
-3
-Predicted and actual were the same. i == 2 is skipped by continue.
-At i == 4 the loop stops with break, so 4 and 5 are never printed.
-
-C2
-day = 2 prints: Early week
-day = 1 prints: Early week
-(case 1 is empty, so it goes into case 2.)
-
-A C or Java programmer would expect for day = 2:
-Early week
-Midweek
-Weekend soon
-because in C/Java there is no break, so execution falls through the
-next cases. Dart 3 automatically stops at the end of every case that
-has code, so only "Early week" prints.
-
-C3
-Output:
-50
-70
-10
-bonus is null so "bonus ?? 50" gives 50 (it does not save it).
-"bonus ??= 70" saves 70 because bonus was null.
-"bonus ??= 90" does nothing because bonus is already 70.
-The do-while runs once, prints 10, n becomes 13, 13 < 10 is false, stop.
-
-C4 (D = 7)
-x = 7 odd -> O, x = 4 even -> E, x = 1 odd -> O, x = -2 stops.
-Output:
-OEO
-3
-O
-No line printed nothing, because result is not empty.
-
-C5
-drawTriangle(10) output (height = D + 3 = 10):
-         *
-        ##
-       ***
-      ####
-     *****
-    ######
-   *******
-  ########
- *********
-##########
-
-drawTriangle(0) and drawTriangle(-2) print nothing because the
-condition row <= height is false at the start, so the loop never runs
-and nothing crashes.
-
-Spaces: on each row I print (height - row) spaces, so row 1 has
-height-1 spaces and the last row has 0.
-
-=========================================================
-PART D: Functions
-=========================================================
-
-D1
-Predicted and actual were the same.
-
-1      bump() has its own local count (10), it hides the global count.
-5      ints are copied into the function, doubleIt changes only its copy.
-1180   1000 + (1000 * 18 ~/ 100) = 1000 + 180.
-1178   999 * 18 = 17982, ~/ 100 = 179, so 999 + 179 = 1178.
-1000   rate is 0 so nothing is added.
-
-Why addVat(999) is not exactly 18% more: ~/ throws away the decimals.
-The exact VAT is 179.82 but the code keeps only 179.
-
-D2
-Real output:
-Receipt 1 | 8700 RWF | fee 100 RWF | to 078*****56
-Receipt 2 | 12700 RWF | fee 250 RWF | to 078*****56
-Receipt 3 | 16700 RWF | fee 250 RWF | to 078*****56
-Receipt 4 | 20700 RWF | fee 250 RWF | to 078*****56
-Receipt 5 | 24700 RWF | fee 250 RWF | to 078*****56
-Receipt 6 | 28700 RWF | fee 250 RWF | to 078*****56
-Receipt 7 | 32700 RWF | fee 250 RWF | to 078*****56
-Receipt 8 | 36700 RWF | fee 250 RWF | to 078*****56
-Receipt 9 | 40700 RWF | fee 250 RWF | to 078*****56
-Receipt 10 | 44700 RWF | fee 250 RWF | to 078*****56
-Total fees: 2350 RWF
-
-First receipt to move into the 250 band: Receipt 2 (12700 is above 10,000).
-
-=========================================================
-PART E: Find and fix
-=========================================================
-
-1. grade(85) returns 'C'. The first check (mark >= 50) is already true
-   for 85, so it returns before reaching the 70 and 80 checks.
-
-2. isPalindrome('level') gives a RangeError. At i = 0 it reads
-   word[word.length - 0] = word[5], but the last index is 4.
-
-3. Lines I changed:
-   grade: I swapped the first and last branches so the highest check
-   comes first (4 lines: the >= 50 and >= 80 conditions and their returns).
-     if (mark >= 80) { return 'A'; }
-     else if (mark >= 70) { return 'B'; }
-     else if (mark >= 50) { return 'C'; }
-   isPalindrome (1 line):
-     if (word[i].toLowerCase() != word[word.length - 1 - i].toLowerCase()) return false;
-
-4. I chose true for 'Level'. A palindrome is about the letters, not
-   about capital or small letters. My code matches because it changes
-   both letters to lowercase before comparing.
-
-=========================================================
-PART F: MoMo USSD simulator
-=========================================================
-
-Real output:
-Reg no: 27047 | D = 7 | T = 47
-false
-false
-false
-false
-true
-Starting balance: 43,500 RWF
-Sent 24,000 RWF (fee 250 RWF). New balance: 19,250 RWF
-Failed: insufficient balance
-Failed: insufficient balance
-Airtime 1,000 RWF purchased. New balance: 18,250 RWF
-Failed: invalid amount
-Failed: insufficient balance
-Final balance: 18,250 RWF
-
-Transaction that surprised me: the second and third sends failed.
-Each send costs 24,250 with the fee, and after the first one only
-19,250 was left.
-
-My own tests (expected output in comments in the code):
-formatRwf(0)        -> 0 RWF
-formatRwf(-1000)    -> -1,000 RWF (the one I thought might break)
-formatRwf(-1)        -> -1 RWF   (the one I thought might break)
-isValidPin('00001')  -> true
-isValidPin('12a45')  -> false
-isValidPin('11111')  -> false
-
-=========================================================
-PART G: Debugging log
-=========================================================
-
-Error 1: RangeError in isPalindrome
-Exact error: RangeError (index): Index out of range: index should be less than 10: 10
-Line: if (word[i] != word[word.length - i]) return false;
-Cause: When i = 0, it reads word[word.length - 0] which is word[5] for
-"level", but the last valid index is 4. Off-by-one error.
-Fix: Changed word[word.length - i] to word[word.length - 1 - i].
-
-Error 2: RangeError in initials with extra spaces
-Exact error: RangeError (index): Index out of range: index should be less than 0: 0
-Line: result += '${parts[i][0].toUpperCase()}.';
-Cause: Splitting ' ana uwase ' on a single space produced empty
-strings like '', and reading [0] of an empty string crashes.
-Fix: Changed split(' ') to split(RegExp(r'\s+')) and added trim()
-before splitting, plus a check if (parts[i].isNotEmpty).
-
-Error 3: grade(85) returning the wrong value
-Exact wrong output: grade(85) returned 'C' instead of 'A'
-Line: if (mark >= 50) { return 'C'; } (this was the first condition)
-Cause: The conditions were in the wrong order. Since 85 >= 50 is true,
-it returned 'C' without checking 70 or 80.
-Fix: Reordered the conditions from highest to lowest: >= 80 first,
-then >= 70, then >= 50.
-
-Which question took the longest:
-Part F (MoMo simulator) took the longest because formatRwf had to group
-digits in threes without any library, so I had to think carefully about
-the index math. Getting the comma placement right for numbers like
-1,000,000 took several tries. isValidPin was also tricky because I had
-to handle many rejection conditions in the right order.
+/Info 11 0 R
+/Root 10 0 R
+/Size 18
+>>
+startxref
+8512
+%%EOF
