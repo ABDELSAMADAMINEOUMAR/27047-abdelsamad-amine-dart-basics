@@ -1,3 +1,11 @@
+# Dart Basics Assignment
+
 Full name: Abdelsamad Amine Oumar
-Registraton number:27047
-Github:https://github.com/ABDELSAMADAMINEOUMAR
+
+Registration number: 27047
+
+D: 7
+
+T: 47
+
+GitHub: https://github.com/ABDELSAMADAMINEOUMAR
