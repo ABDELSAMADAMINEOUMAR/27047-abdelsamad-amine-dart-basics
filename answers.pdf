@@ -1,0 +1,378 @@
+Reg no: 27047 | D = 7 | T = 47
+Name: ABDELSAMAD AMINE OUMAR
+Part A
+A1
+3.4 : a / b gives a double
+3 : ~/ drops the decimal part
+2 : 17 = 3*5 + 2
+3 : % in Dart is never negative, so -17 % 5 is 3-3 - -17 / 5 = -3.4 and ~/ cuts toward zero-17 - abs() runs first, then the minus is applied
+false: 0.1 + 0.2 is 0.30000000000000004 in binary
+true: 10 and 10.0 have the same value
+A2 (x = 7, y = 47)
+z = 7*2 + 47~/4 = 14 + 11 = 25, then z += 7 makes 32.
+32 - 25 + 7
+true - 32 is even
+327 - '32' + '7' joins two strings
+The type of z is int. Dart looks at the first value I gave it, an int times 2 plus  int division which is int,
+so var becomes int.
+Part B
+B1
+6:Kigali has 6 letters
+i : last index is 5
+ga : index 2 and 3, 4 is not included
+3: KIGALI, A is at index 3
+false: case sensitive, k is not K
+Kigali.length - only $city is replaced, .length is plain text
+6 - ${} runs the expression
+KigaliKigali - * repeats the string
+Kigali - toUpperCase gives a new string, city did not change
+K!gal! - both i are replaced
+55 - '5' + '5' joins text
+10 - 5 + 5
+B2
+Output: ABDELSAMAD AMINE OUMAR has 10 vowels (4 + 3 + 3). The line that makes capitals count is
+String lowerText = text.toLowerCase(); If I remove it, capital A, E, I, O, U do not match 'aeiou', and since
+my name is all capitals the answer would be 0.
+B3
+A.A.O.
+A.U.
+(empty line for the spaces-only string)
+My first version split on a single space and took the first letter of each piece. On ' ana uwase ' this made
+empty pieces, and reading [0] of an empty string gave a RangeError. I fixed it by using trim() first, splitting
+with RegExp(r'\s+') and returning an empty string when nothing is left.
+Part C
+C1
+Output: 0, 1, 3. At i = 2 continue skips the print. At i = 4 break stops the loop before the print.
+C2
+With day = 2 it prints Early week. With day = 1 it also prints Early week, because case 1 is empty and uses
+the body of case 2. A C or Java programmer would expect it to continue into the next cases and print
+Early week, Midweek and Weekend soon. Dart 3 does not fall through, it leaves the switch after a case
+that has a body.
+C3
+50 - bonus is null so ?? gives 50
+70 - first ??= sets it to 70
+10 - do-while runs once before it checks n < 10
+The second ??= does nothing because bonus is no longer null.
+C4 (x = 7)
+OEO
+3
+O
+7 is odd (O), 4 is even (E), 1 is odd (O), then x becomes -2 and the loop stops. Length is 3 and the first
+letter is O.
+C5
+Height is 7 + 3 = 10. The number of spaces on each row is height minus the row number, so the symbols
+stay on the right side. For 0 and -2 the while condition is false right away, so nothing prints.
+Part D
+D1
+1 - bump changes its own local count, not the global one
+5 - doubleIt changes a copy of v
+1180 - 1000 * 18 ~/ 100 = 180
+1178 - 999 * 18 = 17982, ~/ 100 gives 179
+1000 - rate 0 adds nothing
+addVat(999) is not exactly 18% more because ~/ is integer division. The real value is 1178.82 and the .82
+is thrown away.
+D2 output
+Reg no: 27047 | D = 7 | T = 47
+Receipt 1 | 8700 RWF | fee 100 RWF | to 078*****56
+Receipt 2 | 12700 RWF | fee 250 RWF | to 078*****56
+Receipt 3 | 16700 RWF | fee 250 RWF | to 078*****56
+Receipt 4 | 20700 RWF | fee 250 RWF | to 078*****56
+Receipt 5 | 24700 RWF | fee 250 RWF | to 078*****56
+Receipt 6 | 28700 RWF | fee 250 RWF | to 078*****56
+Receipt 7 | 32700 RWF | fee 250 RWF | to 078*****56
+Receipt 8 | 36700 RWF | fee 250 RWF | to 078*****56
+Receipt 9 | 40700 RWF | fee 250 RWF | to 078*****56
+Receipt 10 | 44700 RWF | fee 250 RWF | to 078*****56
+Total fees: 2350 RWF
+Receipt 2 was the first one in the 250 RWF band, because 12700 is more than 10000.
+Part E
+1. grade(85) returns 'C'. The first check mark >= 50 is already true, so it returns before the other checks.
+2. isPalindrome('level') gives a RangeError. At i = 0 it reads word[5], but the last index is 4.
+3. Lines I changed in grade: if (mark >= 50) became if (mark >= 80); return 'C' became return 'A'; } else if
+(mark >= 80) became } else if (mark >= 50); return 'A' became return 'C'. Line changed in isPalindrome:
+word[word.length - i] became word[word.length - 1 - i]. Tests: grade 85 = A, 75 = B, 55 = C, 30 = F.
+isPalindrome level = true, abba = true, abc = false.
+4. After the fix, isPalindrome('Level') should return true. A palindrome is about the letters, and when I
+read Level backwards I get the same word, whether the L is capital or not. So I added one extra line, word
+= word.toLowerCase();, before the loop.
+Part F
+Reg no: 27047 | D = 7 | T = 47
+false
+false
+false
+false
+true
+Starting balance: 43,500 RWF
+Sent 24,000 RWF (fee 250 RWF). New balance: 19,250 RWF
+Failed: insufficient balance
+Failed: insufficient balance
+Airtime 1,000 RWF purchased. New balance: 18,250 RWF
+Failed: invalid amount
+Failed: insufficient balance
+Final balance: 18,250 RWF
+The second send surprised me. After the first send only 19,250 RWF is left, which is less than 24,000 plus
+the 250 fee.
+My own tests (expected, then real output):
+formatRwf(42) - expected 42 RWF
+formatRwf(1000000) - expected 1,000,000 RWF
+formatRwf(-1) - expected -1 RWF - (could break with the minus)
+isValidPin('00001') - expected true - (starts with zeros)
+isValidPin('12a45') - expected false
+isValidPin('11111') - expected false
+Name: Abdelsamad Amine Oumar
+Reg no: 27047
+D = 7
+T = 47
+Initials: AAO
+GitHub: https://github.com/ABDELSAMADAMINEOUMAR
+
+=========================================================
+PART A: Variables and operators
+=========================================================
+
+A1
+Predicted and actual output were the same.
+
+3.4    "/" always gives a double, even with two ints.
+3      "~/" is integer division, so 17 ~/ 5 = 3.
+2      17 % 5 leaves remainder 2.
+3      In Dart % is never negative. -17 % 5 = 3.
+-3     ~/ cuts toward zero. -3.4 becomes -3.
+-17    The method .abs() runs first, then the minus. So it is -(17.abs()).
+false  0.1 + 0.2 is 0.30000000000000004 because doubles are not exact.
+true   == compares the value, so 10 and 10.0 are equal.
+
+A2 (x = 7, y = 47)
+z = 7*2 + 47~/4 = 14 + 11 = 25, then z += 7 gives 32.
+Predicted and actual output were the same.
+
+32     the value of z.
+true   32 is even.
+327    '$z' is "32" and '$x' is "7", and + joins them as text.
+
+Type of z: int.
+Dart looks at the right side (x*2 + y~/4). int * int is int and
+int ~/ int is int, so z is an int and cannot change type later.
+
+=========================================================
+PART B: Strings
+=========================================================
+
+B1
+Predicted and actual output were the same.
+
+6              "Kigali" has 6 letters.
+i              last index is length - 1 = 5, which is 'i'.
+ga             substring(2, 4) takes index 2 and 3.
+3              "KIGALI", the A is at index 3.
+false          contains is case sensitive, the string has 'K' not 'k'.
+Kigali.length  without { } only $city is replaced, ".length" stays as text.
+6              ${city.length} calculates the length.
+KigaliKigali   * repeats the string.
+Kigali         toUpperCase() makes a new string, city is not changed.
+K!gal!         replaceAll changes every 'i' to '!'.
+55             '5' + '5' joins two strings.
+10             5 + 5 adds two ints.
+
+B2
+Output:
+ABDELSAMAD AMINE OUMAR has 10 vowels
+(ABDELSAMAD = 4, AMINE = 3, OUMAR = 3)
+
+The line that makes capitals count: String lowerText = text.toLowerCase();
+If I remove it, 'aeiou'.contains('A') is false. My name is all capitals,
+so the answer would be 0 vowels.
+
+B3
+Output:
+A.A.O.
+A.U.
+(empty line for ' ')
+
+Which input broke my first version: ' ana uwase ' (extra spaces).
+What I changed: I added trim(), changed split(' ') to split(RegExp(r'\s+')),
+and skip empty parts. (See Error 2 in Part G.)
+
+=========================================================
+PART C: Control flow
+=========================================================
+
+C1
+Output:
+0
+1
+3
+Predicted and actual were the same. i == 2 is skipped by continue.
+At i == 4 the loop stops with break, so 4 and 5 are never printed.
+
+C2
+day = 2 prints: Early week
+day = 1 prints: Early week
+(case 1 is empty, so it goes into case 2.)
+
+A C or Java programmer would expect for day = 2:
+Early week
+Midweek
+Weekend soon
+because in C/Java there is no break, so execution falls through the
+next cases. Dart 3 automatically stops at the end of every case that
+has code, so only "Early week" prints.
+
+C3
+Output:
+50
+70
+10
+bonus is null so "bonus ?? 50" gives 50 (it does not save it).
+"bonus ??= 70" saves 70 because bonus was null.
+"bonus ??= 90" does nothing because bonus is already 70.
+The do-while runs once, prints 10, n becomes 13, 13 < 10 is false, stop.
+
+C4 (D = 7)
+x = 7 odd -> O, x = 4 even -> E, x = 1 odd -> O, x = -2 stops.
+Output:
+OEO
+3
+O
+No line printed nothing, because result is not empty.
+
+C5
+drawTriangle(10) output (height = D + 3 = 10):
+         *
+        ##
+       ***
+      ####
+     *****
+    ######
+   *******
+  ########
+ *********
+##########
+
+drawTriangle(0) and drawTriangle(-2) print nothing because the
+condition row <= height is false at the start, so the loop never runs
+and nothing crashes.
+
+Spaces: on each row I print (height - row) spaces, so row 1 has
+height-1 spaces and the last row has 0.
+
+=========================================================
+PART D: Functions
+=========================================================
+
+D1
+Predicted and actual were the same.
+
+1      bump() has its own local count (10), it hides the global count.
+5      ints are copied into the function, doubleIt changes only its copy.
+1180   1000 + (1000 * 18 ~/ 100) = 1000 + 180.
+1178   999 * 18 = 17982, ~/ 100 = 179, so 999 + 179 = 1178.
+1000   rate is 0 so nothing is added.
+
+Why addVat(999) is not exactly 18% more: ~/ throws away the decimals.
+The exact VAT is 179.82 but the code keeps only 179.
+
+D2
+Real output:
+Receipt 1 | 8700 RWF | fee 100 RWF | to 078*****56
+Receipt 2 | 12700 RWF | fee 250 RWF | to 078*****56
+Receipt 3 | 16700 RWF | fee 250 RWF | to 078*****56
+Receipt 4 | 20700 RWF | fee 250 RWF | to 078*****56
+Receipt 5 | 24700 RWF | fee 250 RWF | to 078*****56
+Receipt 6 | 28700 RWF | fee 250 RWF | to 078*****56
+Receipt 7 | 32700 RWF | fee 250 RWF | to 078*****56
+Receipt 8 | 36700 RWF | fee 250 RWF | to 078*****56
+Receipt 9 | 40700 RWF | fee 250 RWF | to 078*****56
+Receipt 10 | 44700 RWF | fee 250 RWF | to 078*****56
+Total fees: 2350 RWF
+
+First receipt to move into the 250 band: Receipt 2 (12700 is above 10,000).
+
+=========================================================
+PART E: Find and fix
+=========================================================
+
+1. grade(85) returns 'C'. The first check (mark >= 50) is already true
+   for 85, so it returns before reaching the 70 and 80 checks.
+
+2. isPalindrome('level') gives a RangeError. At i = 0 it reads
+   word[word.length - 0] = word[5], but the last index is 4.
+
+3. Lines I changed:
+   grade: I swapped the first and last branches so the highest check
+   comes first (4 lines: the >= 50 and >= 80 conditions and their returns).
+     if (mark >= 80) { return 'A'; }
+     else if (mark >= 70) { return 'B'; }
+     else if (mark >= 50) { return 'C'; }
+   isPalindrome (1 line):
+     if (word[i].toLowerCase() != word[word.length - 1 - i].toLowerCase()) return false;
+
+4. I chose true for 'Level'. A palindrome is about the letters, not
+   about capital or small letters. My code matches because it changes
+   both letters to lowercase before comparing.
+
+=========================================================
+PART F: MoMo USSD simulator
+=========================================================
+
+Real output:
+Reg no: 27047 | D = 7 | T = 47
+false
+false
+false
+false
+true
+Starting balance: 43,500 RWF
+Sent 24,000 RWF (fee 250 RWF). New balance: 19,250 RWF
+Failed: insufficient balance
+Failed: insufficient balance
+Airtime 1,000 RWF purchased. New balance: 18,250 RWF
+Failed: invalid amount
+Failed: insufficient balance
+Final balance: 18,250 RWF
+
+Transaction that surprised me: the second and third sends failed.
+Each send costs 24,250 with the fee, and after the first one only
+19,250 was left.
+
+My own tests (expected output in comments in the code):
+formatRwf(0)        -> 0 RWF
+formatRwf(-1000)    -> -1,000 RWF (the one I thought might break)
+formatRwf(-1)        -> -1 RWF   (the one I thought might break)
+isValidPin('00001')  -> true
+isValidPin('12a45')  -> false
+isValidPin('11111')  -> false
+
+=========================================================
+PART G: Debugging log
+=========================================================
+
+Error 1: RangeError in isPalindrome
+Exact error: RangeError (index): Index out of range: index should be less than 10: 10
+Line: if (word[i] != word[word.length - i]) return false;
+Cause: When i = 0, it reads word[word.length - 0] which is word[5] for
+"level", but the last valid index is 4. Off-by-one error.
+Fix: Changed word[word.length - i] to word[word.length - 1 - i].
+
+Error 2: RangeError in initials with extra spaces
+Exact error: RangeError (index): Index out of range: index should be less than 0: 0
+Line: result += '${parts[i][0].toUpperCase()}.';
+Cause: Splitting ' ana uwase ' on a single space produced empty
+strings like '', and reading [0] of an empty string crashes.
+Fix: Changed split(' ') to split(RegExp(r'\s+')) and added trim()
+before splitting, plus a check if (parts[i].isNotEmpty).
+
+Error 3: grade(85) returning the wrong value
+Exact wrong output: grade(85) returned 'C' instead of 'A'
+Line: if (mark >= 50) { return 'C'; } (this was the first condition)
+Cause: The conditions were in the wrong order. Since 85 >= 50 is true,
+it returned 'C' without checking 70 or 80.
+Fix: Reordered the conditions from highest to lowest: >= 80 first,
+then >= 70, then >= 50.
+
+Which question took the longest:
+Part F (MoMo simulator) took the longest because formatRwf had to group
+digits in threes without any library, so I had to think carefully about
+the index math. Getting the comma placement right for numbers like
+1,000,000 took several tries. isValidPin was also tricky because I had
+to handle many rejection conditions in the right order.
